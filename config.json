@@ -1,1 +1,6 @@
-{}
+{
+    "port": 80,
+    "server": {
+        "tickRate": 10
+    }
+}

@@ -30,7 +30,7 @@ go run main.go
 <a name="credits"></a>
 ## Credits
 
-- Edgar Alexander Franco: https://github.com/edgaralexanderfr/ (Lead Programmer)
+- Edgar Alexander Franco: https://github.com/edgaralexanderfr (Lead Programmer)
 - Fabio Arias: https://github.com/fharias
 - Leoner Perez: https://github.com/lperezpro
 - Fabian Parra: https://github.com/fabianparra

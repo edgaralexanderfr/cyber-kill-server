@@ -8,3 +8,5 @@ go fmt
 ```
 
 Before any commit you make to keep consistency along the codebase.
+
+3. You can fork and create pull requests to this project if you want someone's review or you can code directly in the main repo if you want.

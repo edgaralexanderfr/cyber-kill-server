@@ -5,7 +5,9 @@ import (
 )
 
 func main() {
-	var game game.GameInterface = game.Game{}
+	var game game.GameInterface = game.Game{
+		GameLoop: game.GameLoop{},
+	}
 
 	game.Run()
 }

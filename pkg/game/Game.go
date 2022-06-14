@@ -8,7 +8,8 @@ import (
 )
 
 type Game struct {
-	Config config.ConfigInterface
+	GameLoop GameLoopInterface
+	Config   config.ConfigInterface
 }
 
 func (game Game) Run() {
@@ -16,5 +17,11 @@ func (game Game) Run() {
 		log.Fatal("Missing required dependencies. Exiting.")
 	}
 
-	fmt.Println("The game is running!")
+	gameConfig := game.Config.GetConfig(true)
+
+	game.GameLoop.Start(gameConfig.Server.TickRate, update)
+}
+
+func update() {
+	fmt.Println("Updating game state...")
 }

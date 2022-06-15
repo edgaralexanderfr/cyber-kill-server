@@ -1,12 +1,30 @@
+// Package game contains the logic of the game itself.
 package game
 
 import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
 )
 
-// We gotta create an EntityFactory too...
+// EntityInterface is used to represent a game entity (GameObject)
 type EntityInterface interface {
-	NewEntity(position physics.Vector2Interface, direction physics.Vector2Interface)
-	Update()  // Create separated function to handle this
-	Destroy() // Create separated function to handle this
+	// NewEntity instantiates a new entity providing the required parameters.
+	NewEntity(
+		id uint32,
+		t string,
+		entityManager EntityManagerInterface,
+		position physics.Vector2Interface,
+		direction physics.Vector2Interface,
+	)
+
+	// GetId returns the entity's ID provided to NewEntity.
+	GetId() uint32
+
+	// GetType returns the entity's Type (t) provided to NewEntity.
+	GetType() string
+
+	// Update updates the entity's state.
+	Update()
+
+	// Destroy calls EntityManagerInterface.Destroy(entity EntityInterface)
+	Destroy()
 }

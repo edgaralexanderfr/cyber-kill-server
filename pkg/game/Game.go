@@ -8,20 +8,27 @@ import (
 )
 
 type Game struct {
-	GameLoop GameLoopInterface
-	Config   config.ConfigInterface
+	GameLoop      GameLoopInterface
+	EntityManager EntityManagerInterface
+	Config        config.ConfigInterface
 }
 
 func (game Game) Run() {
-	if game.Config == nil {
+	if game.GameLoop == nil ||
+		game.EntityManager == nil ||
+		game.Config == nil {
 		log.Fatal("Missing required dependencies. Exiting.")
 	}
 
 	gameConfig := game.Config.GetConfig(true)
 
-	game.GameLoop.Start(gameConfig.Server.TickRate, update)
+	game.GameLoop.Start(gameConfig.Server.TickRate, game.update)
 }
 
-func update() {
+func (game Game) update() {
+	if game.EntityManager != nil {
+		game.EntityManager.UpdateAll()
+	}
+
 	fmt.Println("Updating game state...")
 }

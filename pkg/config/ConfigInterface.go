@@ -1,5 +1,5 @@
 package config
 
 type ConfigInterface interface {
-	GetConfig(cache bool) Config
+	GetConfig(cache bool) *Config
 }

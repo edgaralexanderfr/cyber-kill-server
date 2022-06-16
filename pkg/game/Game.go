@@ -13,7 +13,7 @@ type Game struct {
 	Config        config.ConfigInterface
 }
 
-func (game Game) Run() {
+func (game *Game) Run() {
 	if game.GameLoop == nil ||
 		game.EntityManager == nil ||
 		game.Config == nil {
@@ -25,7 +25,7 @@ func (game Game) Run() {
 	game.GameLoop.Start(gameConfig.Server.TickRate, game.update)
 }
 
-func (game Game) update() {
+func (game *Game) update() {
 	if game.EntityManager != nil {
 		game.EntityManager.UpdateAll()
 	}

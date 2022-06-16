@@ -1,5 +1,5 @@
 package game
 
 type GameLoopInterface interface {
-	Start(tickRate int, update func())
+	Start(tickRate byte, update func())
 }

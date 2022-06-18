@@ -1,9 +1,9 @@
 package config
 
-import "github.com/edgaralexanderfr/cyber-kill-server/pkg/t"
+import "github.com/edgaralexanderfr/cyber-kill-server/pkg/types"
 
 type Config struct {
-	Port t.Port `json:"port"`
+	Port types.Port `json:"port"`
 
 	Server struct {
 		TickRate byte `json:"tickRate"`

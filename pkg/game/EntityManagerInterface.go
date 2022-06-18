@@ -15,6 +15,11 @@ type EntityManagerInterface interface {
 	// Calls the corresponding implemented EntityInterface.Update() method.
 	UpdateAll()
 
+	// Serialize iterates over all the stacked entities on the slice.
+	// Calls the corresponding implemented EntityInterface.Serialize() method.
+	// Returns a slice with all the corresponding states of each entity.
+	Serialize() []GameStateEntityInterface
+
 	// Destroy removes the specified entity from the slice.
 	// It uses EntityInterface.GetId() to look, compare and remove the entity.
 	Destroy(entity EntityInterface)

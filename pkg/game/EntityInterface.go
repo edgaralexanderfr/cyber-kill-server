@@ -22,8 +22,15 @@ type EntityInterface interface {
 	// GetType returns the entity's Type (t) provided to NewEntity.
 	GetType() string
 
+	// GetPosition returns the current X/Y position of the entity.
+	GetPosition() (x float32, y float32)
+
 	// Update updates the entity's state.
 	Update()
+
+	// Serialize returns a JSON with extra data for the current state of the entity.
+	// It a returns a struct{} singleton to be broadcasted through the network.
+	Serialize() GameStateEntityInterface
 
 	// Destroy calls EntityManagerInterface.Destroy(entity EntityInterface)
 	Destroy()

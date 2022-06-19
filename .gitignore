@@ -16,3 +16,4 @@
 
 # Repo
 bin/*
+pkg/*/Test.go

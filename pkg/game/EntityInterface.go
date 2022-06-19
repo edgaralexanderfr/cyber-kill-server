@@ -11,9 +11,10 @@ type EntityInterface interface {
 	NewEntity(
 		id uint32,
 		t string,
-		entityManager EntityManagerInterface,
 		position physics.Vector2Interface,
 		direction physics.Vector2Interface,
+		entityFactory EntityFactoryInterface,
+		entityManager EntityManagerInterface,
 	)
 
 	// GetId returns the entity's ID provided to NewEntity.

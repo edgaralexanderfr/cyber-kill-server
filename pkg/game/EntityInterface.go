@@ -2,6 +2,7 @@
 package game
 
 import (
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
 )
 
@@ -15,6 +16,7 @@ type EntityInterface interface {
 		direction physics.Vector2Interface,
 		entityFactory EntityFactoryInterface,
 		entityManager EntityManagerInterface,
+		input input.InputInterface,
 	)
 
 	// GetId returns the entity's ID provided to NewEntity.

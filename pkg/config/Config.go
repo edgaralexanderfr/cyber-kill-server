@@ -19,21 +19,19 @@ type Config struct {
 }
 
 func (config Config) GetConfig(cacheable bool) *Config {
-	if &config == nil {
-		configFile, err := os.Open("config.json")
-		if err != nil {
-			return nil
-		}
-		defer configFile.Close()
-		json.NewDecoder(configFile).Decode(&config)
+	cfg, found := c.Get("config")
+	if cacheable && found {
+		return cfg.(*Config)
 	}
+	configFile, err := os.Open("config.json")
+	if err != nil {
+		return nil
+	}
+	defer configFile.Close()
+	newCfg := Config{}
+	json.NewDecoder(configFile).Decode(&newCfg)
 	if cacheable {
-		config, found := c.Get("config")
-		if found {
-			return config.(*Config)
-		} else {
-			c.Set("config", &config, cache.NoExpiration)
-		}
+		c.Set("config", newCfg, cache.NoExpiration)
 	}
-	return &config
+	return &newCfg
 }

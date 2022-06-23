@@ -1,6 +1,5 @@
 package input
 
-// TODO: Create Factory...
 type InputInterface interface {
 	// GetAction indicates whether the specified action is being performed or not.
 	GetAction(action string) bool

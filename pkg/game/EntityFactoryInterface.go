@@ -3,6 +3,7 @@ package game
 import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/time"
 )
 
 type EntityFactoryInterface interface {
@@ -16,6 +17,7 @@ type EntityFactoryInterface interface {
 		entityManager EntityManagerInterface,
 		input input.InputInterface,
 		physics physics.MapInterface,
+		time time.TimeInterface,
 	) EntityInterface
 
 	// NewBullet instantiates a new Bullet to be used in the game.
@@ -28,5 +30,6 @@ type EntityFactoryInterface interface {
 		entityManager EntityManagerInterface,
 		input input.InputInterface,
 		physics physics.MapInterface,
+		time time.TimeInterface,
 	) EntityInterface
 }

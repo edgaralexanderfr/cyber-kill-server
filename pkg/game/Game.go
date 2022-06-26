@@ -8,6 +8,7 @@ import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/net"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/time"
 )
 
 type Game struct {
@@ -18,6 +19,7 @@ type Game struct {
 	Matchmaking   net.MatchmakingInterface
 	InputFactory  input.InputFactoryInterface
 	Map           physics.MapInterface
+	Time          time.TimeInterface
 }
 
 func (game *Game) Run() {
@@ -27,6 +29,8 @@ func (game *Game) Run() {
 
 	game.Map.SetTileSize(gameConfig.Map.Size)
 	game.Map.Generate(gameConfig.Map.Width, gameConfig.Map.Height)
+
+	game.Time.SetTickRate(gameConfig.Server.TickRate)
 
 	game.Matchmaking.SetInputEvents(InputEvents)
 	game.Matchmaking.GetPlayerEntity(game.getPlayerEntity)
@@ -43,13 +47,14 @@ func (game *Game) validateDependencies() {
 		game.Config == nil ||
 		game.Matchmaking == nil ||
 		game.InputFactory == nil ||
-		game.Map == nil {
+		game.Map == nil ||
+		game.Time == nil {
 		log.Fatal("Missing required dependencies. Exiting.")
 	}
 }
 
 func (game *Game) getPlayerEntity() net.EntityInterface {
-	player := game.EntityFactory.NewSoldier(1, "soldier", physics.Vector2{}, physics.Vector2{}, game.EntityFactory, game.EntityManager, game.InputFactory.NewInput(), game.Map)
+	player := game.EntityFactory.NewSoldier(1, "soldier", physics.Vector2{}, physics.Vector2{}, game.EntityFactory, game.EntityManager, game.InputFactory.NewInput(), game.Map, game.Time)
 	game.EntityManager.AddEntity(player)
 
 	return player
@@ -62,9 +67,8 @@ func (game *Game) disconnect(entity net.EntityInterface) {
 }
 
 func (game *Game) update() {
-	if game.EntityManager != nil {
-		game.EntityManager.UpdateAll()
-	}
+	game.Time.Update()
+	game.EntityManager.UpdateAll()
 
 	fmt.Println("Updating game state...")
 }

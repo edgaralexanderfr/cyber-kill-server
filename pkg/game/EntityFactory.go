@@ -3,6 +3,7 @@ package game
 import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/time"
 )
 
 type EntityFactory struct{}
@@ -16,6 +17,7 @@ func (factory *EntityFactory) NewSoldier(
 	entityManager EntityManagerInterface,
 	input input.InputInterface,
 	physics physics.MapInterface,
+	time time.TimeInterface,
 ) EntityInterface {
 	return nil
 }
@@ -29,6 +31,7 @@ func (factory *EntityFactory) NewBullet(
 	entityManager EntityManagerInterface,
 	input input.InputInterface,
 	physics physics.MapInterface,
+	time time.TimeInterface,
 ) EntityInterface {
 	return nil
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/net"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/time"
 )
 
 type GameFactory struct{}
@@ -17,6 +18,7 @@ func (gameFactory *GameFactory) NewGame() GameInterface {
 	matchmakingFactory := &net.MatchmakingFactory{}
 	inputFactory := &input.InputFactory{}
 	mapFactory := &physics.MapFactory{}
+	timeFactory := &time.TimeFactory{}
 
 	return &Game{
 		GameLoop:      gameLoopFactory.NewGameLoop(),
@@ -26,5 +28,6 @@ func (gameFactory *GameFactory) NewGame() GameInterface {
 		Matchmaking:   matchmakingFactory.NewMatchmaking(),
 		InputFactory:  inputFactory,
 		Map:           mapFactory.NewMap(),
+		Time:          timeFactory.NewTime(),
 	}
 }

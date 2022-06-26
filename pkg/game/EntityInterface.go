@@ -4,6 +4,7 @@ package game
 import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/time"
 )
 
 // EntityInterface is used to represent a game entity (GameObject)
@@ -18,6 +19,7 @@ type EntityInterface interface {
 		entityManager EntityManagerInterface,
 		input input.InputInterface,
 		physics physics.MapInterface,
+		time time.TimeInterface,
 	)
 
 	// GetId returns the entity's ID provided to NewEntity.

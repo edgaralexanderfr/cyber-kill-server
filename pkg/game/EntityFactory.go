@@ -1,25 +1,32 @@
 package game
 
-import "github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+import (
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
+)
 
 type EntityFactory struct{}
 
-func (entityFactory *EntityFactory) NewSoldier(
+func (factory *EntityFactory) NewSoldier(
 	id uint32,
 	t string,
-	entityManager EntityManagerInterface,
 	position physics.Vector2Interface,
 	direction physics.Vector2Interface,
+	entityFactory EntityFactoryInterface,
+	entityManager EntityManagerInterface,
+	input input.InputInterface,
 ) EntityInterface {
 	return nil
 }
 
-func (entityFactory *EntityFactory) NewBullet(
+func (factory *EntityFactory) NewBullet(
 	id uint32,
 	t string,
-	entityManager EntityManagerInterface,
 	position physics.Vector2Interface,
 	direction physics.Vector2Interface,
+	entityFactory EntityFactoryInterface,
+	entityManager EntityManagerInterface,
+	input input.InputInterface,
 ) EntityInterface {
 	return nil
 }

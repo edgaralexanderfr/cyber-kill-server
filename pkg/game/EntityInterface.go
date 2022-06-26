@@ -28,6 +28,9 @@ type EntityInterface interface {
 	// GetPosition returns the current X/Y position of the entity.
 	GetPosition() (x float32, y float32)
 
+	// GetInput returns a reference to the entity's input interface.
+	GetInput() input.InputInterface
+
 	// Update updates the entity's state.
 	Update()
 

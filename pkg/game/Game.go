@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/config"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/net"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/physics"
 )
@@ -15,6 +16,7 @@ type Game struct {
 	EntityFactory EntityFactoryInterface
 	Config        config.ConfigInterface
 	Matchmaking   net.MatchmakingInterface
+	InputFactory  input.InputFactoryInterface
 }
 
 func (game *Game) Run() {
@@ -26,6 +28,7 @@ func (game *Game) Run() {
 	game.Matchmaking.GetPlayerEntity(game.getPlayerEntity)
 	game.Matchmaking.Disconnect(game.disconnect)
 	game.Matchmaking.Listen(gameConfig.Port)
+
 	game.GameLoop.Start(gameConfig.Server.TickRate, game.update)
 }
 
@@ -40,7 +43,7 @@ func (game *Game) validateDependencies() {
 }
 
 func (game *Game) getPlayerEntity() net.EntityInterface {
-	player := game.EntityFactory.NewSoldier(1, "soldier", game.EntityManager, physics.Vector2{}, physics.Vector2{})
+	player := game.EntityFactory.NewSoldier(1, "soldier", physics.Vector2{}, physics.Vector2{}, game.EntityFactory, game.EntityManager, game.InputFactory.NewInput())
 	game.EntityManager.AddEntity(player)
 
 	return player

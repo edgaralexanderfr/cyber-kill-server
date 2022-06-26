@@ -34,3 +34,4 @@ go run main.go
 - Fabio Arias: https://github.com/fharias
 - Leoner Perez: https://github.com/lperezpro
 - Fabian Parra: https://github.com/fabianparra
+- David Amórtegui: https://github.com/fawkesito

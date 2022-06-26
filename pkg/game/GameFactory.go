@@ -2,6 +2,7 @@ package game
 
 import (
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/config"
+	"github.com/edgaralexanderfr/cyber-kill-server/pkg/input"
 	"github.com/edgaralexanderfr/cyber-kill-server/pkg/net"
 )
 
@@ -13,6 +14,7 @@ func (gameFactory *GameFactory) NewGame() GameInterface {
 	entityFactory := &EntityFactory{}
 	configFactory := &config.ConfigFactory{}
 	matchmakingFactory := &net.MatchmakingFactory{}
+	inputFactory := &input.InputFactory{}
 
 	return &Game{
 		GameLoop:      gameLoopFactory.NewGameLoop(),
@@ -20,5 +22,6 @@ func (gameFactory *GameFactory) NewGame() GameInterface {
 		EntityFactory: entityFactory,
 		Config:        configFactory.NewConfig(),
 		Matchmaking:   matchmakingFactory.NewMatchmaking(),
+		InputFactory:  inputFactory,
 	}
 }

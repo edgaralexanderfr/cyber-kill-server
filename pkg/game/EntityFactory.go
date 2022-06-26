@@ -15,6 +15,7 @@ func (factory *EntityFactory) NewSoldier(
 	entityFactory EntityFactoryInterface,
 	entityManager EntityManagerInterface,
 	input input.InputInterface,
+	physics physics.MapInterface,
 ) EntityInterface {
 	return nil
 }
@@ -27,6 +28,7 @@ func (factory *EntityFactory) NewBullet(
 	entityFactory EntityFactoryInterface,
 	entityManager EntityManagerInterface,
 	input input.InputInterface,
+	physics physics.MapInterface,
 ) EntityInterface {
 	return nil
 }

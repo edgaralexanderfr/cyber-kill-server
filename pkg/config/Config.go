@@ -16,6 +16,12 @@ type Config struct {
 	Server struct {
 		TickRate byte `json:"tickRate"`
 	} `json:"server"`
+
+	Map struct {
+		Width  uint16 `json:"width"`
+		Height uint16 `json:"height"`
+		Size   uint16 `json:"size"`
+	} `json:"map"`
 }
 
 func (config Config) GetConfig(cacheable bool) *Config {

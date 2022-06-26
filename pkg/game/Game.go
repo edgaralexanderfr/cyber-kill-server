@@ -17,12 +17,16 @@ type Game struct {
 	Config        config.ConfigInterface
 	Matchmaking   net.MatchmakingInterface
 	InputFactory  input.InputFactoryInterface
+	Map           physics.MapInterface
 }
 
 func (game *Game) Run() {
 	game.validateDependencies()
 
 	gameConfig := game.Config.GetConfig(true)
+
+	game.Map.SetTileSize(gameConfig.Map.Size)
+	game.Map.Generate(gameConfig.Map.Width, gameConfig.Map.Height)
 
 	game.Matchmaking.SetInputEvents(InputEvents)
 	game.Matchmaking.GetPlayerEntity(game.getPlayerEntity)
@@ -37,13 +41,15 @@ func (game *Game) validateDependencies() {
 		game.EntityManager == nil ||
 		game.EntityFactory == nil ||
 		game.Config == nil ||
-		game.Matchmaking == nil {
+		game.Matchmaking == nil ||
+		game.InputFactory == nil ||
+		game.Map == nil {
 		log.Fatal("Missing required dependencies. Exiting.")
 	}
 }
 
 func (game *Game) getPlayerEntity() net.EntityInterface {
-	player := game.EntityFactory.NewSoldier(1, "soldier", physics.Vector2{}, physics.Vector2{}, game.EntityFactory, game.EntityManager, game.InputFactory.NewInput())
+	player := game.EntityFactory.NewSoldier(1, "soldier", physics.Vector2{}, physics.Vector2{}, game.EntityFactory, game.EntityManager, game.InputFactory.NewInput(), game.Map)
 	game.EntityManager.AddEntity(player)
 
 	return player

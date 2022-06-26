@@ -2,5 +2,10 @@
     "port": 80,
     "server": {
         "tickRate": 10
+    },
+    "map": {
+        "width": 64,
+        "height": 64,
+        "size": 16
     }
 }

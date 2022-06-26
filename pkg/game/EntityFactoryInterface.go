@@ -15,6 +15,7 @@ type EntityFactoryInterface interface {
 		entityFactory EntityFactoryInterface,
 		entityManager EntityManagerInterface,
 		input input.InputInterface,
+		physics physics.MapInterface,
 	) EntityInterface
 
 	// NewBullet instantiates a new Bullet to be used in the game.
@@ -26,5 +27,6 @@ type EntityFactoryInterface interface {
 		entityFactory EntityFactoryInterface,
 		entityManager EntityManagerInterface,
 		input input.InputInterface,
+		physics physics.MapInterface,
 	) EntityInterface
 }

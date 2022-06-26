@@ -17,6 +17,7 @@ type EntityInterface interface {
 		entityFactory EntityFactoryInterface,
 		entityManager EntityManagerInterface,
 		input input.InputInterface,
+		physics physics.MapInterface,
 	)
 
 	// GetId returns the entity's ID provided to NewEntity.

@@ -20,6 +20,7 @@ type Game struct {
 	InputFactory  input.InputFactoryInterface
 	Map           physics.MapInterface
 	Time          time.TimeInterface
+	GameState     GameStateInterface[any]
 }
 
 func (game *Game) Run() {
@@ -48,13 +49,26 @@ func (game *Game) validateDependencies() {
 		game.Matchmaking == nil ||
 		game.InputFactory == nil ||
 		game.Map == nil ||
-		game.Time == nil {
+		game.Time == nil ||
+		game.GameState == nil {
 		log.Fatal("Missing required dependencies. Exiting.")
 	}
 }
 
 func (game *Game) getPlayerEntity() net.EntityInterface {
-	player := game.EntityFactory.NewSoldier(1, "soldier", physics.Vector2{}, physics.Vector2{}, game.EntityFactory, game.EntityManager, game.InputFactory.NewInput(), game.Map, game.Time)
+	player := game.EntityFactory.NewSoldier(
+		game.EntityManager.GetNewId(),
+		"soldier",
+		physics.Vector2{},
+		physics.Vector2{},
+		game.EntityFactory,
+		game.EntityManager,
+		game.InputFactory.NewInput(),
+		game.Map,
+		game.Time,
+		game.GameState,
+	)
+
 	game.EntityManager.AddEntity(player)
 
 	return player
@@ -69,6 +83,12 @@ func (game *Game) disconnect(entity net.EntityInterface) {
 func (game *Game) update() {
 	game.Time.Update()
 	game.EntityManager.UpdateAll()
+
+	game.Matchmaking.Sync(
+		game.GameState.SerializeToJSON(
+			game.EntityManager.Serialize(),
+		),
+	)
 
 	fmt.Println("Updating game state...")
 }

@@ -14,4 +14,7 @@ type MatchmakingInterface interface {
 
 	// Listen initiates the server to listen for the events from the players.
 	Listen(port types.Port)
+
+	// Sync broadcasts the provided game state data to all the connected clients.
+	Sync(gameStateStr string)
 }

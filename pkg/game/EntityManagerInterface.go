@@ -4,6 +4,10 @@ package game
 // EntityManagerInterface is used for handling all game entities.
 // (Players, NPCs, projectiles, etc...)
 type EntityManagerInterface interface {
+	// GetNewId generates a new unique ID for an external entity to create.
+	// e.g. GetNewId() = InternalID = InternalID + 1
+	GetNewId() uint32
+
 	// AddEntity adds a new entity of any type to the slice.
 	AddEntity(entity EntityInterface)
 

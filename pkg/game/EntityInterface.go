@@ -20,6 +20,7 @@ type EntityInterface interface {
 		input input.InputInterface,
 		physics physics.MapInterface,
 		time time.TimeInterface,
+		gameState GameStateInterface[any],
 	)
 
 	// GetId returns the entity's ID provided to NewEntity.

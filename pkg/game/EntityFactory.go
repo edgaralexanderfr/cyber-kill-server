@@ -18,6 +18,7 @@ func (factory *EntityFactory) NewSoldier(
 	input input.InputInterface,
 	physics physics.MapInterface,
 	time time.TimeInterface,
+	gameState GameStateInterface[any],
 ) EntityInterface {
 	return nil
 }
@@ -32,6 +33,7 @@ func (factory *EntityFactory) NewBullet(
 	input input.InputInterface,
 	physics physics.MapInterface,
 	time time.TimeInterface,
+	gameState GameStateInterface[any],
 ) EntityInterface {
 	return nil
 }

@@ -19,6 +19,7 @@ func (gameFactory *GameFactory) NewGame() GameInterface {
 	inputFactory := &input.InputFactory{}
 	mapFactory := &physics.MapFactory{}
 	timeFactory := &time.TimeFactory{}
+	gameStateFactory := &GameStateFactory{}
 
 	return &Game{
 		GameLoop:      gameLoopFactory.NewGameLoop(),
@@ -29,5 +30,6 @@ func (gameFactory *GameFactory) NewGame() GameInterface {
 		InputFactory:  inputFactory,
 		Map:           mapFactory.NewMap(),
 		Time:          timeFactory.NewTime(),
+		GameState:     gameStateFactory.NewGameState(),
 	}
 }

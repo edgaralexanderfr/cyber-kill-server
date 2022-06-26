@@ -18,6 +18,7 @@ type EntityFactoryInterface interface {
 		input input.InputInterface,
 		physics physics.MapInterface,
 		time time.TimeInterface,
+		gameState GameStateInterface[any],
 	) EntityInterface
 
 	// NewBullet instantiates a new Bullet to be used in the game.
@@ -31,5 +32,6 @@ type EntityFactoryInterface interface {
 		input input.InputInterface,
 		physics physics.MapInterface,
 		time time.TimeInterface,
+		gameState GameStateInterface[any],
 	) EntityInterface
 }

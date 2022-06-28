@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Direction To Examples</title>
+    <style type="text/css">
+        html,
+        body {
+            background: #222;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="480" height="360"></canvas>
+    <div id="buttons"></div>
+    <script type="text/javascript">
+        function degreesToRads(degrees) {
+            return (degrees * Math.PI) / 180;
+        }
+
+        var examples = [
+            {
+                speed: 60.0,
+                origin: {
+                    x: 150.0,
+                    y: 150.0,
+                },
+                target: {
+                    a: degreesToRads(45),
+                    length: 150.0,
+                }
+            },
+        ];
+
+        function showExample(e) {
+            var exampleIndex = this.getAttribute('data-example-index');
+            var example = examples[exampleIndex];
+            var dotsRadius = 5;
+            var textPos = 20.0;
+
+            context.fillStyle = 'white';
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the Origin:
+            context.fillStyle = 'blue';
+            context.beginPath();
+            context.arc(example.origin.x, example.origin.y, dotsRadius, 0, Math.PI * 2);
+            context.fill();
+
+            context.fillText('Origin: X = ' + Math.round(example.origin.x * 10) / 10 + '; Y = ' + Math.round(example.origin.y * 10) / 10 + ';', example.origin.x - textPos, example.origin.y - textPos);
+
+            // Draw the Target:
+            var targetX = example.origin.x + (Math.cos(example.target.a) * example.target.length);
+            var targetY = example.origin.y + (Math.sin(example.target.a) * example.target.length);
+
+            context.fillStyle = 'red';
+            context.beginPath();
+            context.arc(targetX, targetY, dotsRadius, 0, Math.PI * 2);
+            context.fill();
+
+            context.fillText('Target: X = ' + Math.round(targetX * 10) / 10 + '; Y = ' + Math.round(targetY * 10) / 10 + ';', targetX - textPos, targetY - textPos);
+
+            // Draw the Result:
+            var resultX = example.origin.x + (Math.cos(example.target.a) * example.speed);
+            var resultY = example.origin.x + (Math.sin(example.target.a) * example.speed);
+
+            context.fillStyle = 'green';
+            context.beginPath();
+            context.arc(resultX, resultY, dotsRadius, 0, Math.PI * 2);
+            context.fill();
+
+            context.fillText('Result: Origin.GetDirectionTo(Target, ' + example.speed + ') X = ' + Math.round(resultX * 10) / 10 + '; Y = ' + Math.round(resultY * 10) / 10 + ';', resultX - textPos, resultY - textPos);
+
+            // Draw the line to the Result:
+            context.strokeStyle = 'green';
+            context.beginPath();
+            context.moveTo(example.origin.x, example.origin.y);
+            context.lineTo(resultX, resultY);
+            context.stroke();
+
+            // Draw texts:
+            context.fillStyle = 'green';
+            context.fillText('Speed = ' + example.speed + ';', 20, 30);
+
+            context.fillStyle = 'black';
+
+            context.fillText('- X +', canvas.width - 30, 30);
+            context.fillText('- Y +', 20, canvas.height - 10);
+
+            // Draw Axis Lines:
+            context.strokeStyle = 'black';
+
+            context.beginPath();
+            context.moveTo(10, 10);
+            context.lineTo(canvas.width - 20, 10);
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(10, 10);
+            context.lineTo(10, canvas.height - 10);
+            context.stroke();
+
+            // Draw the Plane Origin (0, 0):
+            context.fillStyle = 'black';
+            context.beginPath();
+            context.arc(10, 10, dotsRadius, 0, Math.PI * 2);
+            context.fill();
+        }
+
+        var canvas = document.querySelector('canvas');
+        var buttons = document.getElementById('buttons');
+        var context = canvas.getContext('2d');
+        var selectedExampleIndex = 0;
+        var i;
+
+        for (i = 0; i < examples.length; i++) {
+            var button = document.createElement('button');
+            button.setAttribute('data-example-index', i);
+            button.textContent = 'Show Example ' + (i + 1);
+            button.onclick = showExample;
+
+            buttons.appendChild(button);
+
+            if (i == 0) {
+                button.click();
+            }
+        }
+    </script>
+</body>
+
+</html>

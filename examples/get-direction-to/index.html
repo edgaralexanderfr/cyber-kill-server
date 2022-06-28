@@ -32,7 +32,86 @@
                 target: {
                     a: degreesToRads(45),
                     length: 150.0,
-                }
+                },
+                textPos: {
+                    x: 25.0,
+                    y: 20.0,
+                },
+            },
+            {
+                speed: 40.0,
+                origin: {
+                    x: 380.0,
+                    y: 80.0,
+                },
+                target: {
+                    a: degreesToRads(100),
+                    length: 220.0,
+                },
+                textPos: {
+                    x: 200.0,
+                    y: 20.0,
+                },
+            },
+            {
+                speed: 20.0,
+                origin: {
+                    x: 400.0,
+                    y: 300.0,
+                },
+                target: {
+                    a: degreesToRads(220),
+                    length: 200.0,
+                },
+                textPos: {
+                    x: 220.0,
+                    y: 20.0,
+                },
+            },
+            {
+                speed: 200.0,
+                origin: {
+                    x: 120.0,
+                    y: 250.0,
+                },
+                target: {
+                    a: degreesToRads(300),
+                    length: 100.0,
+                },
+                textPos: {
+                    x: 60.0,
+                    y: 20.0,
+                },
+            },
+            {
+                speed: 0.0,
+                origin: {
+                    x: 200.0,
+                    y: 100.0,
+                },
+                target: {
+                    a: degreesToRads(60),
+                    length: 100.0,
+                },
+                textPos: {
+                    x: 20.0,
+                    y: 20.0,
+                },
+            },
+            {
+                speed: 0.0,
+                origin: {
+                    x: 240.0,
+                    y: 180.0,
+                },
+                target: {
+                    a: degreesToRads(0),
+                    length: 0.0,
+                },
+                textPos: {
+                    x: 60.0,
+                    y: 20.0,
+                },
             },
         ];
 
@@ -40,7 +119,6 @@
             var exampleIndex = this.getAttribute('data-example-index');
             var example = examples[exampleIndex];
             var dotsRadius = 5;
-            var textPos = 20.0;
 
             context.fillStyle = 'white';
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -52,7 +130,7 @@
             context.arc(example.origin.x, example.origin.y, dotsRadius, 0, Math.PI * 2);
             context.fill();
 
-            context.fillText('Origin: X = ' + Math.round(example.origin.x * 10) / 10 + '; Y = ' + Math.round(example.origin.y * 10) / 10 + ';', example.origin.x - textPos, example.origin.y - textPos);
+            context.fillText('Origin: X = ' + Math.round(example.origin.x * 10) / 10 + '; Y = ' + Math.round(example.origin.y * 10) / 10 + ';', example.origin.x - example.textPos.x, example.origin.y - example.textPos.y);
 
             // Draw the Target:
             var targetX = example.origin.x + (Math.cos(example.target.a) * example.target.length);
@@ -63,18 +141,20 @@
             context.arc(targetX, targetY, dotsRadius, 0, Math.PI * 2);
             context.fill();
 
-            context.fillText('Target: X = ' + Math.round(targetX * 10) / 10 + '; Y = ' + Math.round(targetY * 10) / 10 + ';', targetX - textPos, targetY - textPos);
+            context.fillText('Target: X = ' + Math.round(targetX * 10) / 10 + '; Y = ' + Math.round(targetY * 10) / 10 + ';', targetX - example.textPos.x, targetY - example.textPos.y);
 
             // Draw the Result:
-            var resultX = example.origin.x + (Math.cos(example.target.a) * example.speed);
-            var resultY = example.origin.x + (Math.sin(example.target.a) * example.speed);
+            var stepX = Math.cos(example.target.a) * example.speed;
+            var stepY = Math.sin(example.target.a) * example.speed;
+            var resultX = example.origin.x + stepX;
+            var resultY = example.origin.y + stepY;
 
             context.fillStyle = 'green';
             context.beginPath();
             context.arc(resultX, resultY, dotsRadius, 0, Math.PI * 2);
             context.fill();
 
-            context.fillText('Result: Origin.GetDirectionTo(Target, ' + example.speed + ') X = ' + Math.round(resultX * 10) / 10 + '; Y = ' + Math.round(resultY * 10) / 10 + ';', resultX - textPos, resultY - textPos);
+            context.fillText('Result (Step): Origin.GetDirectionTo(Target, ' + example.speed + ') = X = ' + Math.round(stepX * 10) / 10 + '; Y = ' + Math.round(stepY * 10) / 10 + ';', resultX - example.textPos.x, resultY - example.textPos.y);
 
             // Draw the line to the Result:
             context.strokeStyle = 'green';

@@ -59,6 +59,7 @@ func (game *Game) getPlayerEntity() net.EntityInterface {
 	player := game.EntityFactory.NewSoldier(
 		game.EntityManager.GetNewId(),
 		"soldier",
+		nil,
 		physics.Vector2{},
 		physics.Vector2{},
 		game.EntityFactory,

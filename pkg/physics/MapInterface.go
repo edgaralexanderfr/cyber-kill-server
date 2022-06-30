@@ -28,4 +28,12 @@ type MapInterface interface {
 	// Returns true if resultant point happens to be inside a tile with true
 	// It multiplies the tile size for each block to do the detection check.
 	PredictCollision(position Vector2Interface, direction Vector2Interface) bool
+
+	// PredictSquareCollision checks square collision detection for the resultant point.
+	// Resultant point = position param + direction param.
+	// Returns true if resultant point happens to be inside the target object.
+	// The target vector represents the center coordinate of the target object.
+	// The size param represents the boundaries/corners of the target's square.
+	// Keep in mind that the target coordinate is the X/Y center pivot of the square.
+	PredictSquareCollision(position Vector2Interface, direction Vector2Interface, target Vector2Interface, size uint32) bool
 }

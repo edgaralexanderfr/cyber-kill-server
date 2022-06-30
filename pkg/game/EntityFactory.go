@@ -11,6 +11,7 @@ type EntityFactory struct{}
 func (factory *EntityFactory) NewSoldier(
 	id uint32,
 	t string,
+	parent EntityInterface,
 	position physics.Vector2Interface,
 	direction physics.Vector2Interface,
 	entityFactory EntityFactoryInterface,
@@ -26,6 +27,7 @@ func (factory *EntityFactory) NewSoldier(
 func (factory *EntityFactory) NewBullet(
 	id uint32,
 	t string,
+	parent EntityInterface,
 	position physics.Vector2Interface,
 	direction physics.Vector2Interface,
 	entityFactory EntityFactoryInterface,

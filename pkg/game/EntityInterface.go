@@ -13,6 +13,7 @@ type EntityInterface interface {
 	NewEntity(
 		id uint32,
 		t string,
+		parent EntityInterface,
 		position physics.Vector2Interface,
 		direction physics.Vector2Interface,
 		entityFactory EntityFactoryInterface,

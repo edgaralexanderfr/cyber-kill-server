@@ -11,6 +11,7 @@ type EntityFactoryInterface interface {
 	NewSoldier(
 		id uint32,
 		t string,
+		parent EntityInterface,
 		position physics.Vector2Interface,
 		direction physics.Vector2Interface,
 		entityFactory EntityFactoryInterface,
@@ -25,6 +26,7 @@ type EntityFactoryInterface interface {
 	NewBullet(
 		id uint32,
 		t string,
+		parent EntityInterface,
 		position physics.Vector2Interface,
 		direction physics.Vector2Interface,
 		entityFactory EntityFactoryInterface,

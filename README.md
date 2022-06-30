@@ -1,6 +1,8 @@
 # CyberKill Server
 
 [![View last release](https://img.shields.io/badge/version-v0.0.1-informational.svg)](https://github.com/edgaralexanderfr/cyber-kill-server/releases/latest)
+![Project progress](https://us-central1-progress-markdown.cloudfunctions.net/progress/10)
+![Next version](https://img.shields.io/badge/v1.0.0-yellow.svg)
 
 Simple multiplayer **Third-Person Shooting Game** using `WebSockets` with the classic _**Deathmatch Mode**_, to learn **Golang** alongside collaborative development.
 

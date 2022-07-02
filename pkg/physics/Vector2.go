@@ -5,6 +5,6 @@ type Vector2 struct {
 	Y float32
 }
 
-func (vector2 Vector2) GetDirectionTo(target Vector2Interface, speed float32) Vector2Interface {
+func (vector2 Vector2) GetDirectionTo(target Vector2, speed float32) Vector2 {
 	return Vector2{}
 }

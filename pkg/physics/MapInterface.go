@@ -11,7 +11,7 @@ type MapInterface interface {
 	// This spawn point is typically used to spawn the players.
 	// It checks that the spawn point is not true inside the matrix to be valid.
 	// The X/Y coordinates for the spawn point are the center of the valid tile.
-	GetRandomValidSpawnPoint() Vector2Interface
+	GetRandomValidSpawnPoint() Vector2
 
 	// SetTileSize stores the size for each tile/block.
 	// It is used by PredictCollision to detect if the resultant point collides.
@@ -27,7 +27,7 @@ type MapInterface interface {
 	// Resultant point = position param + direction param.
 	// Returns true if resultant point happens to be inside a tile with true
 	// It multiplies the tile size for each block to do the detection check.
-	PredictCollision(position Vector2Interface, direction Vector2Interface) bool
+	PredictCollision(position Vector2, direction Vector2) bool
 
 	// PredictSquareCollision checks square collision detection for the resultant point.
 	// Resultant point = position param + direction param.
@@ -35,5 +35,5 @@ type MapInterface interface {
 	// The target vector represents the center coordinate of the target object.
 	// The size param represents the boundaries/corners of the target's square.
 	// Keep in mind that the target coordinate is the X/Y center pivot of the square.
-	PredictSquareCollision(position Vector2Interface, direction Vector2Interface, target Vector2Interface, size uint32) bool
+	PredictSquareCollision(position Vector2, direction Vector2, target Vector2, size uint32) bool
 }

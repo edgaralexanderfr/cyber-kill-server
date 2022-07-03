@@ -60,7 +60,7 @@ func (game *Game) getPlayerEntity() net.EntityInterface {
 		game.EntityManager.GetNewId(),
 		"soldier",
 		nil,
-		physics.Vector2{},
+		game.Map.GetRandomValidSpawnPoint(),
 		physics.Vector2{},
 		game.EntityFactory,
 		game.EntityManager,

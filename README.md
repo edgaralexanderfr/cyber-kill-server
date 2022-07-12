@@ -8,8 +8,9 @@ Simple multiplayer **Third-Person Shooting Game** using `WebSockets` with the cl
 
 ##### Table of contents
 1. [Getting started](#getting-started)
-2. [Contributing](CONTRIBUTING.md)
-3. [Credits](#credits)
+2. [Compiling](#compiling)
+3. [Contributing](CONTRIBUTING.md)
+4. [Credits](#credits)
 
 <a name="getting-started"></a>
 ## Getting started
@@ -24,10 +25,25 @@ git clone https://github.com/edgaralexanderfr/cyber-kill-server.git
 3. Run the application with the following command:
 
 ```bash
-go run main.go
+go run game-server.go
 ```
 
 4. Happy coding! 💻
+
+<a name="compiling"></a>
+## Compiling
+
+### Compiling all binaries
+
+```bash
+make
+```
+
+### Cleaning all binaries
+
+```bash
+make clean
+```
 
 <a name="credits"></a>
 ## Credits

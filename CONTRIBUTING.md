@@ -1,5 +1,10 @@
 # CONTRIBUTING
 
+## Programs / Dependencies
+
+1. Go 1.18
+2. Make 4.2.1
+
 ## Development
 
 1. Fork the repo.

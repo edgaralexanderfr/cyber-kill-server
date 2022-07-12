@@ -19,7 +19,8 @@ bin/*
 pkg/*/Test.go
 test/*
 !test/.gitkeep
-
+web-client/public/wasm/*
+!web-client/public/wasm/.gitkeep
 
 #Codespaces binary
 /oryxBuildBinary

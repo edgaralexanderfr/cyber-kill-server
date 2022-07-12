@@ -1,7 +1,11 @@
 {
-    "port": 80,
+    "port": 443,
     "server": {
-        "tickRate": 10
+        "tickRate": 10,
+        "web": {
+            "port": 80,
+            "dir": "./web-client/public"
+        }
     },
     "map": {
         "width": 64,

@@ -15,6 +15,11 @@ type Config struct {
 
 	Server struct {
 		TickRate byte `json:"tickRate"`
+
+		Web struct {
+			Port types.Port `json:"port"`
+			Dir  string     `json:"dir"`
+		} `json:"web"`
 	} `json:"server"`
 
 	Map struct {

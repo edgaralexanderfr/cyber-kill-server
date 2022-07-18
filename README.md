@@ -25,7 +25,7 @@ git clone https://github.com/edgaralexanderfr/cyber-kill-server.git
 3. Run the application with the following command:
 
 ```bash
-go run game-server.go
+go run cmd/game-server/main.go
 ```
 
 4. Happy coding! 💻

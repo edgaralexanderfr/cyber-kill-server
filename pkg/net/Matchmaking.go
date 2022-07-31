@@ -1,6 +1,7 @@
 package net
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -99,7 +100,57 @@ func (matchmaking *Matchmaking) addClient(connection *websocket.Conn) {
 }
 
 func (matchmaking *Matchmaking) receive(message *MatchmakingMessage) {
-	fmt.Println(string(message.Message))
+	for _, connection := range matchmaking.MatchmakingConnections {
+		if message.WebSocketConn == connection.WebSocketConn {
+			var digitalInputEvent DigitalInputEvent
+			var analogicInputEvent AnalogicInputEvent
+
+			eventType := INPUT_EVENT_TYPE_DIGITAL
+			err := json.Unmarshal(message.Message, &digitalInputEvent)
+
+			if err != nil {
+				eventType = INPUT_EVENT_TYPE_ANALOGIC
+				err = json.Unmarshal(message.Message, &analogicInputEvent)
+
+				if err != nil {
+					break
+				}
+			}
+
+			for _, inputEvent := range matchmaking.InputEvents {
+				if eventType == INPUT_EVENT_TYPE_DIGITAL &&
+					inputEvent.Type == INPUT_EVENT_TYPE_DIGITAL &&
+					digitalInputEvent.Event == inputEvent.Event {
+
+					if connection.Entity != nil && connection.Entity.GetInput() != nil {
+						input := connection.Entity.GetInput()
+						input.SetAction(digitalInputEvent.Event, digitalInputEvent.Value)
+					}
+
+					break
+				}
+
+				if eventType == INPUT_EVENT_TYPE_ANALOGIC &&
+					inputEvent.Type == INPUT_EVENT_TYPE_ANALOGIC &&
+					analogicInputEvent.Event == inputEvent.Event {
+
+					if connection.Entity != nil && connection.Entity.GetInput() != nil {
+						input := connection.Entity.GetInput()
+
+						input.SetValue(
+							analogicInputEvent.Event,
+							analogicInputEvent.Value.X,
+							analogicInputEvent.Value.Y,
+						)
+					}
+
+					break
+				}
+			}
+
+			break
+		}
+	}
 }
 
 func (matchmaking *Matchmaking) removeClient(closedConnection *websocket.Conn) {
@@ -113,5 +164,5 @@ func (matchmaking *Matchmaking) removeClient(closedConnection *websocket.Conn) {
 		}
 	}
 
-	util.Splice(matchmaking.MatchmakingConnections, indexToRemove)
+	matchmaking.MatchmakingConnections = util.Splice(matchmaking.MatchmakingConnections, indexToRemove)
 }

@@ -21,6 +21,8 @@ test/*
 !test/.gitkeep
 web-client/public/wasm/*
 !web-client/public/wasm/.gitkeep
+web-client/public/assets/models/*
+!web-client/public/assets/models/.gitkeep
 
 #Codespaces binary
 /oryxBuildBinary

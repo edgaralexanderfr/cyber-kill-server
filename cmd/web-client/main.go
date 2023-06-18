@@ -26,6 +26,9 @@ func main() {
 	innerHeight := window.Get("innerHeight").Int()
 
 	scene = THREE.Get("Scene").New()
+
+	scene.Set("background", THREE.Get("Color").New(0x444444))
+
 	camera = THREE.Get("PerspectiveCamera").New(75, innerWidth/innerHeight, 0.1, 1000)
 
 	renderer = THREE.Get("WebGLRenderer").New()
